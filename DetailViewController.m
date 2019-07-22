@@ -8,7 +8,6 @@
 
 #import "DetailViewController.h"
 #import <SDWebImage/SDWebImage.h>
-#import "UIImageView+Extends.h"
 
 @interface TestImageView : UIImageView
 
@@ -34,7 +33,7 @@
 
 @implementation DetailViewController
 
-- (void)test {
+- (void)configureView {
     CGFloat itemWidth = ([[UIScreen mainScreen] bounds].size.width - 10 * 5) / 4.0;
     CGFloat itemHeight = itemWidth / 80.0 * 110.0;
     
@@ -58,10 +57,6 @@
     [self.imageView4 setImageUrl:_urls[3]];
 }
 
-- (void)configureView {
-    [self test];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -82,7 +77,7 @@
     [self.imageView3 removeFromSuperview];
     [self.imageView4 removeFromSuperview];
     
-    [self test];
+    [self configureView];
 }
 
 @end
@@ -101,12 +96,7 @@
     _imageView = [[TestImageView alloc] init];
     [self addSubview:_imageView];
     
-    if ([imageUrl hasSuffix:@".gif"]) {//加载Gif图片
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
-    } else {
-        [self.imageView setImageWithDefaultImage:nil ImageURL:imageUrl];
-//            [self sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:placeholdImage];
-    }
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
     
     CGFloat itemWidth = ([[UIScreen mainScreen] bounds].size.width - 10 * 5) / 4.0;
     CGFloat itemHeight = itemWidth / 80.0 * 110.0;
